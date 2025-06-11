@@ -1,0 +1,61 @@
+<div class="event-list-card">
+  <p-table
+    [value]="events()"
+    [paginator]="true"
+    [rows]="10"
+    [showCurrentPageReport]="true"
+    currentPageReportTemplate="Показано с {first} по {last} из {totalRecords} мероприятий"
+    [rowsPerPageOptions]="[5, 10, 20]"
+    [tableStyle]="{ 'min-width': '50rem' }"
+    styleClass="p-datatable-gridlines p-datatable-striped"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th *ngFor="let col of cols" [pSortableColumn]="col.field" class="table-header-col">
+          {{ col.header }}
+          <p-sortIcon [field]="col.field"></p-sortIcon>
+        </th>
+        <th class="table-header-col actions-col">Действия</th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-event>
+      <tr>
+        <td>{{ event.name }}</td>
+        <td>{{ event.description }}</td>
+        <td>{{ event.location }}</td>
+        <td>
+          <strong>{{ event.type | translate }}</strong>
+          <br />
+          <small>{{ getSpecificData(event) }}</small>
+        </td>
+        <td class="actions-cell">
+          <p-button
+            icon="pi pi-pencil"
+            styleClass="p-button-success p-mr-2"
+            pRipple
+            (click)="onEdit(event)"
+            tooltipPosition="top"
+            pTooltip="Редактировать"
+          ></p-button>
+          <p-button
+            icon="pi pi-trash"
+            styleClass="p-button-danger"
+            pRipple
+            (click)="onDelete(event.id)"
+            tooltipPosition="top"
+            pTooltip="Удалить"
+          ></p-button>
+        </td>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td [attr.colspan]="cols.length + 1" class="text-center py-4">
+          Мероприятий не найдено. Добавьте новое!
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

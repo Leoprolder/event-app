@@ -1,0 +1,14 @@
+.form-field-container {
+  margin-bottom: 1.5rem;
+}
+
+:host ::ng-deep .p-inputnumber {
+  width: 100%;
+}
+
+.p-error {
+  color: #dc3545;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+  display: block;
+}

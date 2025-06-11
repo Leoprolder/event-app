@@ -1,0 +1,14 @@
+<div [formGroup]="parentFormGroup" class="form-field-container">
+  <p-floatlabel variant="on">
+    <input
+      pInputText
+      id="genre"
+      formControlName="genre"
+      class="p-inputtext w-full"
+    />
+    <label for="genre">Жанр музыки</label>
+  </p-floatlabel>
+  <small class="p-error" *ngIf="genreControl.invalid && (genreControl.dirty || genreControl.touched)">
+    <span *ngIf="genreControl.errors?.['required']">Жанр музыки обязателен.</span>
+  </small>
+</div>

@@ -1,0 +1,27 @@
+<div [formGroup]="parentFormGroup" class="form-field-container">
+  <p-floatlabel variant="on">
+    <p-inputNumber
+      id="participantsCount"
+      formControlName="participantsCount"
+      mode="decimal"
+      [min]="1"
+      inputId="minmax-2"
+      [showButtons]="true"
+      [useGrouping]="false"
+      class="p-inputtext w-full"
+      inputStyle="width: 100%"
+    ></p-inputNumber>
+    <label for="participantsCount">Количество участников</label>
+  </p-floatlabel>
+  <small
+    class="p-error"
+    *ngIf="participantsCountControl.invalid && (participantsCountControl.dirty || participantsCountControl.touched)"
+  >
+    <span *ngIf="participantsCountControl.errors?.['required']">
+      Количество участников обязательно.
+    </span>
+    <span *ngIf="participantsCountControl.errors?.['min']">
+      Количество участников должно быть не менее 1.
+    </span>
+  </small>
+</div>

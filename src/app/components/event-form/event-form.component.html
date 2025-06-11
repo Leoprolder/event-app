@@ -1,0 +1,108 @@
+<div class="event-form-container">
+  <form [formGroup]="eventForm" (ngSubmit)="onSubmit()" class="p-fluid">
+    <div class="p-field form-group">
+      <p-floatlabel variant="on">
+        <input
+          pInputText
+          id="name"
+          formControlName="name"
+          class="w-full"
+        />
+        <label for="name">Название</label>
+      </p-floatlabel>
+      <small
+        class="p-error"
+        *ngIf="nameControl.invalid && nameControl.dirty"
+      >
+        <span *ngIf="nameControl.errors?.['required']">Название обязательно.</span>
+      </small>
+    </div>
+
+    <div class="p-field form-group">
+      <p-floatlabel variant="on">
+        <textarea
+          pInputTextarea
+          id="description"
+          formControlName="description"
+          rows="3"
+          [autoResize]="true"
+          class="w-full"
+        ></textarea>
+        <label for="description">Описание</label>
+      </p-floatlabel>
+      <small
+        class="p-error"
+        *ngIf="descriptionControl.invalid && descriptionControl.dirty"
+      >
+        <span *ngIf="descriptionControl.errors?.['required']">Описание обязательно.</span>
+      </small>
+    </div>
+
+    <div class="p-field form-group">
+      <p-floatlabel variant="on">
+        <input
+          pInputText
+          id="location"
+          formControlName="location"
+          class="w-full"
+        />
+        <label for="location">Место проведения</label>
+      </p-floatlabel>
+      <small
+        class="p-error"
+        *ngIf="locationControl.invalid && locationControl.dirty"
+      >
+        <span *ngIf="locationControl.errors?.['required']">Место проведения обязательно.</span>
+      </small>
+    </div>
+
+    <div class="p-field form-group">
+        <p-floatlabel variant="on">
+            <p-select
+                id="type"
+                [options]="eventTypes"
+                formControlName="type"
+                optionLabel="label"
+                optionValue="value"
+                [showClear]="false"
+                placeholder="Тип мероприятия"
+                class="w-full"
+            ></p-select>
+            <label for="type">Тип мероприятия</label>
+        </p-floatlabel>
+      <small class="p-error" *ngIf="typeControl.invalid && typeControl.dirty">
+        <span *ngIf="typeControl.errors?.['required']">Тип мероприятия обязателен.</span>
+      </small>
+    </div>
+    <ng-container [ngSwitch]="eventForm.get('type')?.value">
+      <app-event-form-sport-fields
+        *ngSwitchCase="'Sport'"
+        [parentFormGroup]="eventForm"
+      ></app-event-form-sport-fields>
+
+      <app-event-form-music-fields
+        *ngSwitchCase="'Music'"
+        [parentFormGroup]="eventForm"
+      ></app-event-form-music-fields>
+    </ng-container>
+
+    <div class="form-actions p-d-flex p-jc-end">
+      <p-button
+        label="Отмена"
+        icon="pi pi-times"
+        styleClass="p-button-secondary p-button-text p-mr-2"
+        pRipple
+        (onClick)="onCancel()"
+        type="button"
+      ></p-button>
+      <p-button
+        label="Сохранить"
+        icon="pi pi-check"
+        styleClass="p-button-primary"
+        pRipple
+        type="submit"
+        [disabled]="eventForm.invalid && eventForm.dirty"
+      ></p-button>
+    </div>
+  </form>
+</div>
