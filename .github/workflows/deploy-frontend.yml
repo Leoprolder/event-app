@@ -22,15 +22,13 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-        working-directory: ./event-app
 
       - name: Build Angular app
         run: npm run build
-        working-directory: ./event-app
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         if: github.ref == 'refs/heads/main'
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./event-app/dist
+          publish_dir: dist/event-app
