@@ -1,59 +1,87 @@
-# EventApp
+# Event-App
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.1.
+Небольшое Angular-приложение для управления списком мероприятий, разработанное в рамках тестового задания. Приложение демонстрирует работу с компонентами Angular, использование Angular Signals и подход к архитектуре компонентов через структурную композицию для форм.
 
-## Development server
+## Описание
 
-To start a local development server, run:
+Приложение позволяет пользователю:
+* Просматривать список мероприятий в табличном виде.
+* Добавлять новые мероприятия с общими и специфическими полями (для спортивных и музыкальных мероприятий).
+* Редактировать существующие мероприятия.
+* Удалять мероприятия из списка.
+
+Данные хранятся в памяти приложения (в сервисе на основе Angular Signals) и не требуют реализации бэкенда.
+
+## Используемые технологии
+
+* **Angular** (Standalone Components) - Основной фреймворк для разработки интерфейса.
+* **Angular Signals** - Для реактивного управления состоянием приложения (список мероприятий).
+* **PrimeNG** - Библиотека UI-компонентов для стилизации и удобства работы с интерфейсом (таблицы, формы, диалоги).
+* **Reactive Forms** - Для управления формами добавления/редактирования мероприятий с валидацией.
+* **TypeScript** - Основной язык разработки.
+* **Vite** - Для быстрой сборки и запуска приложения.
+
+## Структура проекта
+src/
+├── app/
+│   ├── app.component.ts           // Корневой компонент приложения, управляющий диалогом формы и списком
+│   ├── app.config.ts              // Конфигурация приложения для Standalone компонентов
+│   │
+│   ├── core/
+│   │   ├── services/
+│   │   │   └── event.service.ts   // Сервис для управления данными о мероприятиях (использует Signals)
+│   │   ├── models/
+│   │   │   └── event.model.ts     // Интерфейсы и перечисления для моделей данных мероприятий
+│   │
+│   ├── components/
+│   │   ├── event-list/            // Компонент для отображения списка мероприятий в таблице
+│   │   ├── event-form/            // Универсальный компонент формы для добавления/редактирования
+│   │   ├── event-form-sport-fields/ // Компонент специфических полей для спортивных мероприятий
+│   │   └── event-form-music-fields/ // Компонент специфических полей для музыкальных мероприятий
+│   │
+│   └── main.ts                      // Точка входа в приложение
+└── styles.css                     // Глобальные стили, включая импорты PrimeNG тем и иконок
+
+## Начало работы
+
+Следуйте этим инструкциям, чтобы запустить приложение на вашей локальной машине.
+
+### Необходимые условия
+
+* Node.js
+* npm
+
+### Установка
+
+1.  **Клонируйте репозиторий:**
+    ```bash
+    git clone https://github.com/Leoprolder/event-app
+    cd event-app
+    ```
+
+2.  **Установите зависимости:**
+    ```bash
+    npm install
+    ```
+
+### Запуск приложения
+
+Для запуска приложения в режиме разработки:
 
 ```bash
-ng serve
+npm run dev
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Приложение будет доступно по адресу http://localhost:4200
 
-## Code scaffolding
+## Функционал
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+* Просмотр списка: Мероприятия отображаются в таблице с пагинацией и сортировкой.
+* Добавление мероприятия: Кнопка "Добавить мероприятие" открывает модальное окно формы.
+* Редактирование мероприятия: Кнопки "Редактировать" в таблице открывают модальное окно формы с предзаполненными данными.
+* Удаление мероприятия: Кнопки "Удалить" в таблице позволяют удалить мероприятие после подтверждения.
+* Динамические поля формы: В зависимости от выбранного "Типа мероприятия" (Спорт, Музыка) форма динамически отображает* специфические поля ("Количество участников" или "Жанр музыки").
+* Валидация формы: Поля формы имеют базовую валидацию, сообщения об ошибках отображаются при некорректном вводе.
 
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Онлайн-версия
+Имеется также развёрнутая версия на Github Pages, доступная по адресу https://leoprolder.github.io/event-app
