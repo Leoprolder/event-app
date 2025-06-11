@@ -27,7 +27,7 @@ import { EventItem } from './core/models/event.model';
   styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit {
-  title = 'Список мероприятий'; //test change
+  title = 'Список мероприятий';
 
   displayEventForm = signal(false);
   currentEvent = signal<EventItem | null>(null);
